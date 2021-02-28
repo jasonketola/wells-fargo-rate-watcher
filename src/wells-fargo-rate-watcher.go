@@ -20,6 +20,8 @@ func main() {
 		log.Fatalf("Error loading .env, %v", err)
 	}
 
+	ThresholdRate, _ := strconv.ParseFloat(os.Getenv("THRESHOLD_RATE"), 32)
+
 	// Instantiate default collector
 	c := colly.NewCollector(
 		colly.AllowedDomains("www.wellsfargorelo.com"),
@@ -48,7 +50,7 @@ func main() {
 		stringRate := rates[0][:len(rates[0])-1]
 		currentRate, _ := strconv.ParseFloat(stringRate, 32)
 
-		if currentRate < THRESHOLD_RATE {
+		if currentRate < ThresholdRate {
 			emailRate(stringRate)
 		} else {
 			return
@@ -62,7 +64,7 @@ func emailRate(rate string) {
 	password := os.Getenv("EMAIL_PASSWORD")
 	port := os.Getenv("EMAIL_PORT")
 	to := os.Getenv("EMAIL_TO")
-	THRESHOLD_RATE, _ := strconv.ParseFloat(os.Getenv("THRESHOLD_RATE"), 32)
+
 
 	msg := "From: " + from + "\n" +
 	"To: " + to + "\n" +
