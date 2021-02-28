@@ -46,7 +46,7 @@ func main() {
 		stringRate := rates[0][:len(rates[0])-1]
 		currentRate, _ := strconv.ParseFloat(stringRate, 32)
 
-		if currentRate < 3.0 {
+		if currentRate < THRESHOLD_RATE {
 			emailRate(stringRate)
 		} else {
 			return
@@ -55,11 +55,12 @@ func main() {
 }
 
 func emailRate(rate string) {
-	host := os.Getenv(EMAIL_HOST)
-	from := os.Getenv(EMAIL_FROM)
-	password := os.Getenv(EMAIL_PASSWORD)
-	port := os.Getenv(EMAIL_PORT)
-	to := os.Getenv(EMAIL_TO)
+	host := os.Getenv("EMAIL_HOST")
+	from := os.Getenv("EMAIL_FROM")
+	password := os.Getenv("EMAIL_PASSWORD")
+	port := os.Getenv("EMAIL_PORT")
+	to := os.Getenv("EMAIL_TO")
+	THRESHOLD_RATE, _ := strconv.ParseFloat(os.Getenv("THRESHOLD_RATE"))
 
 	msg := "From: " + from + "\n" +
 	"To: " + to + "\n" +
