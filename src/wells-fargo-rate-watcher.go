@@ -4,6 +4,8 @@ import (
 	"strconv"
 	"log"
 	"os"
+	"fmt"
+	"net/smtp"
 	"github.com/gocolly/colly"
 	"github.com/joho/godotenv"
 )
@@ -60,7 +62,7 @@ func emailRate(rate string) {
 	password := os.Getenv("EMAIL_PASSWORD")
 	port := os.Getenv("EMAIL_PORT")
 	to := os.Getenv("EMAIL_TO")
-	THRESHOLD_RATE, _ := strconv.ParseFloat(os.Getenv("THRESHOLD_RATE"))
+	THRESHOLD_RATE, _ := strconv.ParseFloat(os.Getenv("THRESHOLD_RATE"), 32)
 
 	msg := "From: " + from + "\n" +
 	"To: " + to + "\n" +
