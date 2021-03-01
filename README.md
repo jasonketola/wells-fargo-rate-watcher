@@ -1,2 +1,2 @@
 # wells-fargo-rate-watcher
-Watching refinance rates.
+Email me when the quoted interest rate falls below a threshold value.
